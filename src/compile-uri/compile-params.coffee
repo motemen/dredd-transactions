@@ -1,11 +1,11 @@
 {deserialize} = require('../refract-serialization')
 
 
-module.exports = (refractHrefVariables) ->
+module.exports = (hrefVariablesElement) ->
   params = {}
-  return params unless refractHrefVariables
+  return params unless hrefVariablesElement
 
-  deserialize(refractHrefVariables).forEach((valueElement, keyElement, memberElement) ->
+  hrefVariablesElement.forEach((valueElement, keyElement, memberElement) ->
     name = keyElement.toValue()
     params[name] =
       required: isRequired(memberElement)
@@ -13,7 +13,6 @@ module.exports = (refractHrefVariables) ->
       example: getExampleValue(valueElement)
       values: getValues(valueElement)
   )
-  console.log params
   return params
 
 
